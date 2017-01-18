@@ -17,6 +17,8 @@ namespace LiveToLift.Data
 
         IDbRepository<FitnessProgram> FitnessPrograms { get; }
 
+        IDbRepository<FitnessProgramInstance> FitnessProgramInstances { get; }
+
         IDbRepository<ProgressSheet> ProgressSheets { get; }
 
         IDbRepository<Training> Trainings { get; }
@@ -26,6 +28,16 @@ namespace LiveToLift.Data
         IDbRepository<Comment> Comments { get; }
 
         IDbRepository<Rating> Ratings { get; }
+
+        IDbRepository<Menu> Menus { get; }
+
+        IDbRepository<MenuNode> MenuNodes { get; }
+
+        IIdentityRepository Identity { get; }
+
+
+
+        
 
         int SaveChanges();
     }

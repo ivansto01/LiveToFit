@@ -53,6 +53,9 @@ namespace LiveToLift.Services
 
         public int UpdateTraining(TrainingViewModel viewModel, bool isAdmin, string userId)
         {
+
+           
+
             var db = this.data.Trainings.All().FirstOrDefault(t => t.Id == viewModel.Id);
             db.Number = viewModel.Number;
             db.Duration = viewModel.Duration;

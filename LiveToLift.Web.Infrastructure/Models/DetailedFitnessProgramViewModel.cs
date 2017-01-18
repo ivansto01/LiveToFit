@@ -10,7 +10,8 @@ namespace LiveToLift.Web.Infrastructure.Models
 {
     public class DetailedFitnessProgramViewModel: BaseViewModel, IMapFrom<FitnessProgram>
     {
-       
+
+        public int OverallTrainingCount { get; set; }
 
         public string Name { get; set; }
 

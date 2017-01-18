@@ -75,5 +75,16 @@ namespace LiveToLift.Web.Controllers
 
             return new HttpResponseMessage() { Content = new JsonContent(new { connected = true }) };
         }
+
+        [Authorize]
+        public HttpResponseMessage AddFitnessProgramInstance(FitnessProgramInstanceViewModel model)
+        {
+            var userId = User.Identity.GetUserId();
+            model.ApplicationUsersId = userId;
+           
+            int id = this.fitnessProgramService.AddFitnessProgramInstance(model);
+
+            return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
+        }
     }
 }

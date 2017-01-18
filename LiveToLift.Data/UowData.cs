@@ -53,6 +53,14 @@ namespace LiveToLift.Data
             }
         }
 
+        public IDbRepository<FitnessProgramInstance> FitnessProgramInstances
+        {
+            get
+            {
+                return this.GetRepository<FitnessProgramInstance>();
+            }
+        }
+
         public IDbRepository<ProgressSheet> ProgressSheets
         {
             get
@@ -92,6 +100,32 @@ namespace LiveToLift.Data
                 return this.GetRepository<Comment>();
             }
         }
+
+        public IDbRepository<Menu> Menus
+        {
+            get
+            {
+                return this.GetRepository<Menu>();
+            }
+        }
+
+        public IDbRepository<MenuNode> MenuNodes
+        {
+            get
+            {
+                return this.GetRepository<MenuNode>();
+            }
+        }
+
+        public IIdentityRepository Identity
+        {
+            get
+            {
+                return new IdentityRepository(this.context);
+            }
+        }
+
+     
 
         public int SaveChanges()
         {

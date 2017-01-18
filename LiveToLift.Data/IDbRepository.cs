@@ -12,6 +12,7 @@ namespace LiveToLift.Data
     {
     }
 
+
     public interface IDbRepository<T, in TKey>
         where T : BaseModel<TKey>
     {

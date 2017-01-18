@@ -21,6 +21,53 @@ namespace LiveToLift.Services
         {
         }
 
+        public int AddFitnessProgramInstance(FitnessProgramInstanceViewModel model)
+        {
+            var fitnessProgram = this.data.FitnessPrograms.All().FirstOrDefault(p => p.Id ==  model.FitnessProgramId);
+
+            var user = this.data.Identity.GetById(model.ApplicationUsersId);
+
+            FitnessProgramInstance dbModel = Mapper.Map<FitnessProgramInstance>(model);
+
+            if (fitnessProgram.Trainings.Count == 0)
+            {
+                throw new ArgumentException("Only pragrams which have trainings can be added to user.");
+            }
+
+
+            for (int i =0; i < fitnessProgram.OverallTrainingCount; i++)
+            {
+                TrainingDay newTrainingDay = new TrainingDay();
+
+                //get 0,1,2 0,1,2...
+                var training = fitnessProgram.Trainings.ElementAt(i % fitnessProgram.Trainings.Count);
+
+                newTrainingDay.Number = training.Number;
+
+                for (int j = 0; j < training.Exercises.Count; j++)
+                {
+                    var excercise = training.Exercises.ElementAt(j);
+
+                    newTrainingDay.ExerciseInstances.Add(
+                        new ExerciseInstance()
+                    {
+                        ExerciseId = excercise.Id
+                    });
+                }
+
+                dbModel.TrainingDays.Add(newTrainingDay);
+            }
+            
+
+            data.FitnessProgramInstances.Add(dbModel);
+
+            user.FitnessProgramInstances.Add(dbModel);
+            data.SaveChanges();
+            
+
+            return dbModel.Id;
+        }
+
         public void AddTrainingToFitnessProgram(AddTrainingToProgramViewModel model, bool isAdmin, string userId)
         {
             FitnessProgram fitnessProgram = this.data.FitnessPrograms.All().FirstOrDefault(f => f.Id == model.FitnessProgramId);
@@ -93,6 +140,7 @@ namespace LiveToLift.Services
             db.PhotoUrl = viewModel.PhotoUrl;
             db.AuthorName = viewModel.AuthorName;
             db.VideoUrl = viewModel.VideoUrl;
+            db.OverallTrainingCount = viewModel.OverallTrainingCount;
 
             //FitnessProgram fitnesProgra = Mapper.Map<FitnessProgram>(viewModel);   // Avtomati4no mapvane s Imap-era
 
@@ -106,7 +154,7 @@ namespace LiveToLift.Services
             {
                 throw new UnauthorizedAccessException();
             }
-            
+
 
             return db.Id;
         }

@@ -59,8 +59,11 @@
     <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\DetailedFitnessProgramViewModel.cs" />
+    <Compile Include="Models\ExerciseInstanceViewModel.cs" />
     <Compile Include="Models\ExerciseVeiwModel.cs" />
+    <Compile Include="Models\FitnessProgramInstanceViewModel.cs" />
     <Compile Include="Models\FitnessProgramViewModel.cs" />
+    <Compile Include="Models\TrainingDayViewModel.cs" />
     <Compile Include="Models\TrainingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\JsonContent.cs" />

@@ -45,7 +45,7 @@ namespace LiveToLift.Models
             set { trainings = value; }
         }
 
-        
+        public int OverallTrainingCount { get; set; }
 
 
     }

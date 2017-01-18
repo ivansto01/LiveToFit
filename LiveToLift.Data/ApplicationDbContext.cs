@@ -29,6 +29,8 @@ namespace LiveToLift.Data
 
         public DbSet<FitnessProgram> FitnessPrograms { get; set; }
 
+        public DbSet<FitnessProgramInstance> FitnessProgramInstances { get; set; }
+
         public DbSet<ProgressSheet> ProgressSheets { get; set; }
 
         public DbSet<Training> Trainings { get; set; }
@@ -38,6 +40,10 @@ namespace LiveToLift.Data
         public DbSet<Rating> Ratings { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Menu> Menus { get; set; }
+
+        public DbSet<MenuNode> MenuNodes { get; set; }
 
 
 

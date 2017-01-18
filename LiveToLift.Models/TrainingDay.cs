@@ -8,14 +8,17 @@ namespace LiveToLift.Models
 {
     public class TrainingDay : BaseModel<int>
     {
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
-        private ICollection<Exercise> exercises;
+
+        public int? Number { get; set; }
+
+        //private ICollection<Exercise> exercises;
         private ICollection<ExerciseInstance> exerciseInstances;
 
         public TrainingDay()
         {
-            this.exercises = new HashSet<Exercise>();
+            //this.exercises = new HashSet<Exercise>();
             this.exerciseInstances = new HashSet<ExerciseInstance>();
         }
 
@@ -26,10 +29,10 @@ namespace LiveToLift.Models
         }
 
 
-        public virtual ICollection<Exercise> Exercises
-        {
-            get { return exercises; }
-            set { exercises = value; }
-        }
+        //public virtual ICollection<Exercise> Exercises
+        //{
+        //    get { return exercises; }
+        //    set { exercises = value; }
+        //}
     }
 }

@@ -17,6 +17,6 @@ namespace LiveToLift.Web.Infrastructure.Models
 
         public string CreatorId { get; set; }
 
-
+        public int OverallTrainingCount { get; set; }
     }
 }

@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationRole.cs" />
+    <Compile Include="ApplicationUserRole.cs" />
     <Compile Include="BaseModels\BaseModel.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Exercise.cs" />
@@ -65,6 +67,8 @@
     <Compile Include="BaseModels\IAuditInfo.cs" />
     <Compile Include="BaseModels\IDeletableEntity.cs" />
     <Compile Include="FitnessProgramInstance.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="MenuNode.cs" />
     <Compile Include="ProgressSheet.cs" />
     <Compile Include="Rating.cs" />
     <Compile Include="Training.cs" />

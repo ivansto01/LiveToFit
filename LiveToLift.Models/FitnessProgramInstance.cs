@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,9 @@ namespace LiveToLift.Models
 {
     public class FitnessProgramInstance:BaseModel<int>
     {
-        private ICollection<ApplicationUser> applicationUsers;
-
-        public virtual ICollection<ApplicationUser> ApplicationUsers
-        {
-            get { return applicationUsers; }
-            set { applicationUsers = value; }
-        }
+        [Required]
+        public string ApplicationUsersId { get; set; }
+        public ApplicationUser ApplicationUsers { get; set; }
 
 
         private ICollection<TrainingDay> trainingDays;
@@ -31,7 +28,7 @@ namespace LiveToLift.Models
         public FitnessProgramInstance()
         {
             this.trainingDays = new HashSet<TrainingDay>();
-            this.applicationUsers = new HashSet<ApplicationUser>();
+            
         }
     }
 }

@@ -20,18 +20,20 @@ namespace LiveToLift.Models
             return userIdentity;
         }
 
+        public ICollection<ApplicationUserRole> UserRoles { get; set; }
+
         public string Name { get; set; }
 
         public string PhotoUrl { get; set; }
 
 
-        private ICollection<FitnessProgramInstance> fitnessPrograms;
+        private ICollection<FitnessProgramInstance> fitnessProgramsInstances;
         private ICollection<ProgressSheet> progressSheets;
         private ICollection<Rating> ratings;
 
         public ApplicationUser()
         {
-            this.fitnessPrograms = new HashSet<FitnessProgramInstance>();
+            this.fitnessProgramsInstances = new HashSet<FitnessProgramInstance>();
             this.progressSheets = new HashSet<ProgressSheet>();
             this.ratings = new HashSet<Rating>();
         }
@@ -42,10 +44,10 @@ namespace LiveToLift.Models
             set { ratings = value; }
         }
 
-        public virtual ICollection<FitnessProgramInstance> FitnessPrograms
+        public virtual ICollection<FitnessProgramInstance> FitnessProgramInstances
         {
-            get { return fitnessPrograms; }
-            set { fitnessPrograms = value; }
+            get { return fitnessProgramsInstances; }
+            set { fitnessProgramsInstances = value; }
         }
 
 
