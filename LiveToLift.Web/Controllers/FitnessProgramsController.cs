@@ -1,13 +1,17 @@
-﻿using LiveToLift.Services;
+﻿using Autofac;
+using LiveToLift.Models;
+using LiveToLift.Services;
 using LiveToLift.Web.Infrastructure.Models;
 using LiveToLift.Web.Infrastructure.Serialization;
 using LiveToLift.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Web.Http;
 
 namespace LiveToLift.Web.Controllers
@@ -39,12 +43,23 @@ namespace LiveToLift.Web.Controllers
         public List<FitnessProgramViewModel> ShowFitnessPrograms(int skip = 0, int take = 10)
         {
 
-            List<FitnessProgramViewModel> fitnessPrograms = this.fitnessProgramService.DisplayFitnessPrograms(skip,take);
+            List<FitnessProgramViewModel> fitnessPrograms = this.fitnessProgramService.DisplayFitnessPrograms(skip, take);
 
             return fitnessPrograms;
         }
 
-       
+        [HttpGet]
+        [Authorize]
+        public List<CommentViewModel> GetCommentsByFitnessProgramId(int programId, int skip = 0, int take = 10)
+        {
+            
+
+            List<CommentViewModel> comments = this.fitnessProgramService.GetCommentsByFitnessProgramId(programId, skip, take);
+
+            return comments;
+        }
+
+
         [HttpGet]
         public DetailedFitnessProgramViewModel GetFitnessProgramById(int id)
         {

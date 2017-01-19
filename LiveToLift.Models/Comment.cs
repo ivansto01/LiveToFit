@@ -9,7 +9,8 @@ namespace LiveToLift.Models
 {
     public class Comment : BaseModel<int>
     {
-        public ApplicationUser User { get; set; }
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [MaxLength(1000)]
         public string Content { get; set; }

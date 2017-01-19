@@ -68,6 +68,8 @@ namespace LiveToLift.Services
             return dbModel.Id;
         }
 
+        
+
         public void AddTrainingToFitnessProgram(AddTrainingToProgramViewModel model, bool isAdmin, string userId)
         {
             FitnessProgram fitnessProgram = this.data.FitnessPrograms.All().FirstOrDefault(f => f.Id == model.FitnessProgramId);
@@ -128,6 +130,18 @@ namespace LiveToLift.Services
 
             return model;
         }
+
+        public List<CommentViewModel> GetCommentsByFitnessProgramId(int programId, int skip = 0, int take = 10)
+        {
+            var fitnessProgram = this.data.FitnessPrograms.All().FirstOrDefault(f => f.Id == programId);
+
+
+            var comments = (fitnessProgram.Comments.OrderBy(c => c.CreatedOn).Skip(skip).Take(take)).AsQueryable().Project().To<CommentViewModel>().ToList();
+
+            return comments;
+        }
+
+        
 
         // Pri Edit i Update moje da se naloji vs propertita da se mapvat na ryka :
 

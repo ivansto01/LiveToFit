@@ -16,5 +16,7 @@ namespace LiveToLift.Models
         public int? Count { get; set; }
 
         public string Tempo { get; set; }
+
+        public ProgressSheet ProgresSheets { get; set; }
     }
 }

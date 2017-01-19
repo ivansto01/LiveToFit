@@ -11,7 +11,7 @@ namespace LiveToLift.Web.Infrastructure.Models
 {
     public class CommentViewModel : BaseViewModel, IMapFrom<Comment>, IHaveCustomMappings
     {
-        
+
         public string UserName { get; set; }
 
         public string Content { get; set; }
@@ -19,8 +19,8 @@ namespace LiveToLift.Web.Infrastructure.Models
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<Comment, CommentViewModel>()
-             .ForMember(m => m.UserName, opt => opt.MapFrom(t => t.User.Name))
-             
+             .ForMember(m => m.UserName, opt => opt.MapFrom(t => t.User != null ? t.User.Name : null))
+
              .ReverseMap();
         }
     }

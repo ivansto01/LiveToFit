@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -50,7 +51,7 @@ namespace LiveToLift.Models
             set { fitnessProgramsInstances = value; }
         }
 
-
+        [Required]
         public virtual ICollection<ProgressSheet> ProgressSheets
         {
             get { return progressSheets; }

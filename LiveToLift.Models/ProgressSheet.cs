@@ -13,7 +13,12 @@ namespace LiveToLift.Models
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
 
-        public ExerciseInstance ExerciseInstance { get; set; }
+        public ICollection<ExerciseInstance> ExerciseInstances { get; set; }
+
+        public ProgressSheet()
+        {
+            this.ExerciseInstances = new HashSet<ExerciseInstance>();
+        }
 
         public string PhotoUrl { get; set; }
 

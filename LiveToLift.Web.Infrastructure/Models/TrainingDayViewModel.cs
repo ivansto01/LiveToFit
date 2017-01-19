@@ -13,9 +13,11 @@ namespace LiveToLift.Web.Infrastructure.Models
     {
         public DateTime? Date { get; set; }
 
+        public int? Number { get; set; }
+
         public virtual ICollection<ExerciseInstanceViewModel> ExerciseInstances { get; set; }
 
-        public virtual ICollection<ExerciseVeiwModel> Exercises { get; set; }
+        //public virtual ICollection<ExerciseVeiwModel> Exercises { get; set; }
         
     }
 }
