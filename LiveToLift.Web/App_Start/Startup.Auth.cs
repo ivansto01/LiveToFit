@@ -11,6 +11,7 @@ using Owin;
 using LiveToLift.Web.Providers;
 using LiveToLift.Web.Models;
 using LiveToLift.Data;
+using System.Web.Http;
 
 namespace LiveToLift.Web
 {
@@ -35,7 +36,7 @@ namespace LiveToLift.Web
             // Configure the application for OAuth based flow
             PublicClientId = "self";
 
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+          
 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
@@ -47,6 +48,8 @@ namespace LiveToLift.Web
                 AllowInsecureHttp = true,
                 
             };
+
+            
 
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
