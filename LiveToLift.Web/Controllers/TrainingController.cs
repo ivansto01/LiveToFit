@@ -49,15 +49,15 @@ namespace LiveToLift.Web.Controllers
 
         }
 
-        [Authorize]
-        public HttpResponseMessage Update(TrainingViewModel viewModel)
-        {
-            var isAdmin = User.IsInRole("admin");
-            var userId = User.Identity.GetUserId();
+        //[Authorize]
+        //public HttpResponseMessage Update(TrainingViewModel viewModel)
+        //{
+        //    var isAdmin = User.IsInRole("admin");
+        //    var userId = User.Identity.GetUserId();
 
-            int id = this.trainingService.UpdateTraining(viewModel, isAdmin, userId);
-            return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
-        }
+        //    int id = this.trainingService.UpdateTraining(viewModel, isAdmin, userId);
+        //    return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
+        //}
 
         
     }

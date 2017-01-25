@@ -29,6 +29,9 @@ namespace LiveToLift.Models
         }
 
 
+        public int FitnessProgramInstanceId { get; set; }
+        public FitnessProgramInstance FitnessProgramInstance { get; set; }
+
         //public virtual ICollection<Exercise> Exercises
         //{
         //    get { return exercises; }

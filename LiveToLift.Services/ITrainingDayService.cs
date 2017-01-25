@@ -10,5 +10,7 @@ namespace LiveToLift.Services
     public interface ITrainingDayService
     {
         List<TrainingDayViewModel> GetCommentsByFitnessProgramId(int programId);
+        List<TrainingDayViewModel> GetTrainingdaysByProgramInstanceId(int programInstanceId);
+        int UpdateTrainingDay(TrainingDayViewModel viewModel, bool isAdmin, string userId);
     }
 }

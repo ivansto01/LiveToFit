@@ -117,6 +117,14 @@ namespace LiveToLift.Data
             }
         }
 
+        public IDbRepository<TrainerTraineeRequest> TrainerTraineeRequests
+        {
+            get
+            {
+                return this.GetRepository<TrainerTraineeRequest>();
+            }
+        }
+
         public IIdentityRepository Identity
         {
             get
@@ -125,7 +133,21 @@ namespace LiveToLift.Data
             }
         }
 
-     
+        public IDbRepository<ActiveTrainingUsers> ActiveTrainingUsers
+        {
+            get
+            {
+                return this.GetRepository<ActiveTrainingUsers>();
+            }
+        }
+
+        public IDbRepository<InactiveTrainingUsers> InactiveTrainingUsers
+        {
+            get
+            {
+                return this.GetRepository<InactiveTrainingUsers>();
+            }
+        }
 
         public int SaveChanges()
         {

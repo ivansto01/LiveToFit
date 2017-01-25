@@ -13,6 +13,12 @@ namespace LiveToLift.Models
             : base()
         { }
 
+        public string RoleId { get; set; }
         public ApplicationRole Role { get; set; }
+
+        public string ApplicationUsersId { get; set; }
+        public ApplicationUser ApplicationUsers { get; set; }
+
+
     }
 }

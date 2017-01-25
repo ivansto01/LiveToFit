@@ -37,6 +37,11 @@ namespace LiveToLift.Models
             this.fitnessProgramsInstances = new HashSet<FitnessProgramInstance>();
             this.progressSheets = new HashSet<ProgressSheet>();
             this.ratings = new HashSet<Rating>();
+
+            this.UserRoles = new HashSet<ApplicationUserRole>();
+
+            //this.ActiveTrainingUsers = new HashSet<ApplicationUser>();
+            //this.InactiveTrainingUsers = new HashSet<ApplicationUser>();
         }
 
         public virtual ICollection<Rating> Ratings
@@ -58,5 +63,17 @@ namespace LiveToLift.Models
             set { progressSheets = value; }
         }
 
+        //public virtual ICollection<ApplicationUser> ActiveTrainingUsers { get; set; }
+        //public virtual ICollection<ApplicationUser> InactiveTrainingUsers { get; set; }
+
+
+        //public string TrainerId { get; set; }
+        //public ApplicationUser Trainer
+        //{
+        //    get; set;
+
+        //}
+
+       
     }
 }

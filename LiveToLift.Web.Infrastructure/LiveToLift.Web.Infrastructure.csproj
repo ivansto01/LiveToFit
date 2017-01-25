@@ -64,6 +64,7 @@
     <Compile Include="Models\ExerciseVeiwModel.cs" />
     <Compile Include="Models\FitnessProgramInstanceViewModel.cs" />
     <Compile Include="Models\FitnessProgramViewModel.cs" />
+    <Compile Include="Models\ProgressSheetViewModel.cs" />
     <Compile Include="Models\TrainingDayViewModel.cs" />
     <Compile Include="Models\TrainingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

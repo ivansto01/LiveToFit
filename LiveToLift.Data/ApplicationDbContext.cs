@@ -45,7 +45,11 @@ namespace LiveToLift.Data
 
         public DbSet<MenuNode> MenuNodes { get; set; }
 
+        public DbSet<TrainerTraineeRequest> TrainerTraineeRequests { get; set; }
 
+        public DbSet<ActiveTrainingUsers> ActiveTrainingUsers { get; set; }
+
+        public DbSet<InactiveTrainingUsers> InactiveTrainingUsers { get; set; }
 
         public override int SaveChanges()
         {

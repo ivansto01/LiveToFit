@@ -12,6 +12,6 @@ namespace LiveToLift.Services
         List<TrainingViewModel> DisplayFitnessPrograms(int skip = 0, int take = 10);
         TrainingViewModel TrainingById(int id);
         int CreateNewTraining(TrainingViewModel model);
-        int UpdateTraining(TrainingViewModel viewModel, bool isAdmin, string userId);
+        
     }
 }

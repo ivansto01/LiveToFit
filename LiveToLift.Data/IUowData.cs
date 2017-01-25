@@ -33,11 +33,14 @@ namespace LiveToLift.Data
 
         IDbRepository<MenuNode> MenuNodes { get; }
 
+        IDbRepository<TrainerTraineeRequest> TrainerTraineeRequests { get; }
+
         IIdentityRepository Identity { get; }
+        IDbRepository<ActiveTrainingUsers> ActiveTrainingUsers { get; }
+        IDbRepository<InactiveTrainingUsers> InactiveTrainingUsers { get; }
 
 
 
-        
 
         int SaveChanges();
     }

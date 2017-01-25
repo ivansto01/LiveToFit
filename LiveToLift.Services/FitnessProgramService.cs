@@ -143,7 +143,7 @@ namespace LiveToLift.Services
 
         
 
-        // Pri Edit i Update moje da se naloji vs propertita da se mapvat na ryka :
+        // Pri Edit i Update e mnogo preporychotelno vs propertita da se mapvat na ryka :
 
         public int UpdateFitnessProgram(DetailedFitnessProgramViewModel viewModel, bool isAdmin, string userId)
         {
