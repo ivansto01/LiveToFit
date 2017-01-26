@@ -56,6 +56,7 @@
     <Compile Include="Mapping\AutoMapperConfig.cs" />
     <Compile Include="Mapping\IHaveCustomMappings.cs" />
     <Compile Include="Mapping\IMapFrom.cs" />
+    <Compile Include="Models\AddExInstanceToProgressSheetViewModel.cs" />
     <Compile Include="Models\AddTrainingToProgramViewModel.cs" />
     <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />

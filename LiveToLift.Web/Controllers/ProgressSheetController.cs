@@ -61,12 +61,32 @@ namespace LiveToLift.Web.Controllers
                 }
             }
 
-
-
             int id = progressSheetService.CreateNewProgressSheet(model);
 
             return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
 
+        }
+
+        [Authorize]
+        public HttpResponseMessage UpdateProgressSheet(ProgressSheetViewModel viewModel)
+        {
+            var isAdmin = User.IsInRole("admin");
+            var userId = User.Identity.GetUserId();
+            viewModel.UserId = userId;
+
+            int id = this.progressSheetService.UpdateProgressSheet(viewModel, isAdmin, userId);
+            return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
+        }
+
+        [Authorize]
+        public HttpResponseMessage AddExerciseInstanceToProgressSheet(AddExInstanceToProgressSheetViewModel model)
+        {
+            var isAdmin = User.IsInRole("admin");
+            var userId = User.Identity.GetUserId();
+              
+
+            this.progressSheetService.AddExerciseInstanceToProgressSheet(model, isAdmin, userId);
+            return new HttpResponseMessage() { Content = new JsonContent(new { connected = true }) };
         }
     }
 }

@@ -65,9 +65,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentService.cs" />
     <Compile Include="CommonService.cs" />
     <Compile Include="ExerciseService.cs" />
     <Compile Include="FitnessProgramService.cs" />
+    <Compile Include="ICommentService.cs" />
     <Compile Include="ICommonService.cs" />
     <Compile Include="IExerciseService.cs" />
     <Compile Include="IFitnessProgramService.cs" />

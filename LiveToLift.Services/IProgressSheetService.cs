@@ -12,5 +12,7 @@ namespace LiveToLift.Services
         List<ProgressSheetViewModel> GetUserProgressSheet(string userId);
         int CreateNewProgressSheet(ProgressSheetViewModel model);
         bool HasAuthorityToCreateProgressSheet(string userId, string adressUserId);
+        int UpdateProgressSheet(ProgressSheetViewModel viewModel, bool isAdmin, string userId);
+        void AddExerciseInstanceToProgressSheet(AddExInstanceToProgressSheetViewModel model, bool isAdmin, string userId);
     }
 }
