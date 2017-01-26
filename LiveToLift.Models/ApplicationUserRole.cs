@@ -9,15 +9,11 @@ namespace LiveToLift.Models
 {
     public class ApplicationUserRole : IdentityUserRole
     {
-        public ApplicationUserRole()
-            : base()
-        { }
+        //public ApplicationUserRole()
+        //    : base()
+        //{ }
 
-        public string RoleId { get; set; }
-        public ApplicationRole Role { get; set; }
-
-        public string ApplicationUsersId { get; set; }
-        public ApplicationUser ApplicationUsers { get; set; }
+        public int Id { get; set; }
 
 
     }

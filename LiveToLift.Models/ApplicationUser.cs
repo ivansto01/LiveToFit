@@ -21,7 +21,7 @@ namespace LiveToLift.Models
             return userIdentity;
         }
 
-        public ICollection<ApplicationUserRole> UserRoles { get; set; }
+        //public ICollection<ApplicationUserRole> UserRoles { get; set; }
 
         public string Name { get; set; }
 
@@ -38,7 +38,7 @@ namespace LiveToLift.Models
             this.progressSheets = new HashSet<ProgressSheet>();
             this.ratings = new HashSet<Rating>();
 
-            this.UserRoles = new HashSet<ApplicationUserRole>();
+            //this.UserRoles = new HashSet<ApplicationUserRole>();
 
             //this.ActiveTrainingUsers = new HashSet<ApplicationUser>();
             //this.InactiveTrainingUsers = new HashSet<ApplicationUser>();

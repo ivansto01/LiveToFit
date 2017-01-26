@@ -9,14 +9,12 @@ namespace LiveToLift.Models
 {
     public class ApplicationRole : IdentityRole
     {
-        public ApplicationRole() : base() { }
-
-        public ApplicationRole(string name, string description)
-            : base(name)
+        public ApplicationRole() : base()
         {
-            this.Description = description;
             this.MenuNodes = new HashSet<MenuNode>();
         }
+
+       
 
         public virtual string Description { get; set; }
 

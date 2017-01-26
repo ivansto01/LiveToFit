@@ -44,7 +44,8 @@ namespace LiveToLift.Services
             
             var activeTraining = this.data.ActiveTrainingUsers.All().Where(s => s.TrainerId == userId).FirstOrDefault(s=>s.TraineeId == adressUserId);
 
-            if (user.UserRoles.Any(s => s.Role.Name == "trainer") && activeTraining !=null)
+            //user.UserRoles.Any(s=>s.) &&   
+            if ( activeTraining !=null)
             {
                 result = true;
             }
