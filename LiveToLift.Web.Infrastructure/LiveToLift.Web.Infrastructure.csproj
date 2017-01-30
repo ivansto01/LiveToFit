@@ -56,6 +56,7 @@
     <Compile Include="Mapping\AutoMapperConfig.cs" />
     <Compile Include="Mapping\IHaveCustomMappings.cs" />
     <Compile Include="Mapping\IMapFrom.cs" />
+    <Compile Include="Models\AddActiveTrainerUsersViewModel.cs" />
     <Compile Include="Models\AddExInstanceToProgressSheetViewModel.cs" />
     <Compile Include="Models\AddTrainingToProgramViewModel.cs" />
     <Compile Include="Models\BaseViewModel.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Models\ProgressSheetViewModel.cs" />
     <Compile Include="Models\TrainingDayViewModel.cs" />
     <Compile Include="Models\TrainingViewModel.cs" />
+    <Compile Include="Models\UserDetailsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\JsonContent.cs" />
   </ItemGroup>

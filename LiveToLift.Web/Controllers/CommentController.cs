@@ -34,8 +34,8 @@ namespace LiveToLift.Web.Controllers
         public HttpResponseMessage CreateNewComment(CommentViewModel model)
         {
 
-            var userName = User.Identity.Name;
-            model.UserName = userName;
+            var userId = User.Identity.GetUserId();
+            model.UserId = userId;
            
 
             int id = commentService.CreateNewComment(model);

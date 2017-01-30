@@ -12,6 +12,10 @@ namespace LiveToLift.Web.Infrastructure.Models
     public class CommentViewModel : BaseViewModel, IMapFrom<Comment>, IHaveCustomMappings
     {
 
+        public int? FitnessProgramId { get; set; }
+
+        public string UserId { get; set; }
+
         public string UserName { get; set; }
 
         public string Content { get; set; }
@@ -25,3 +29,4 @@ namespace LiveToLift.Web.Infrastructure.Models
         }
     }
 }
+  
