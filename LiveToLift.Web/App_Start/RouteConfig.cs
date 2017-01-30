@@ -18,6 +18,12 @@ namespace LiveToLift.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+          //  routes.MapRoute(
+          //    name: "DetailsByUserName",
+          //    url: "{controller}/{action}/{username}",
+          //    defaults: new { controller = "Home", action = "Index", username = UrlParameter.Optional }
+          //);
         }
     }
 }

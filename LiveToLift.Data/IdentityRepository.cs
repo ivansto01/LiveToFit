@@ -31,5 +31,10 @@ namespace LiveToLift.Data
         {
             return (ApplicationRole)this.Context.Roles.FirstOrDefault(s => s.Id == id);
         }
+
+        public ApplicationUser GetByUsername(string name)
+        {
+            return this.Context.Users.FirstOrDefault(s => s.UserName == name);
+        }
     }
 }

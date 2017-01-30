@@ -14,5 +14,8 @@ namespace LiveToLift.Models
 
         [MaxLength(1000)]
         public string Content { get; set; }
+
+        public int?  FitnessProgramId { get; set; }
+        public virtual FitnessProgram FitnessProgram { get; set; }
     }
 }
