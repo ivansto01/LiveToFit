@@ -15,6 +15,23 @@ namespace LiveToLift.Services
         {
         }
 
+        public int ActivateUser(AddActiveTrainerUsersViewModel viewModel, string userId)
+        {
+            ActiveTrainingUsers activeuser = new ActiveTrainingUsers();
+            activeuser.TrainerId = userId;
+            activeuser.TraineeId = viewModel.TraineeId;
+
+            InactiveTrainingUsers inactiveUser = this.data.InactiveTrainingUsers.All().FirstOrDefault(i => i.TrainerId == userId && i.TraineeId == viewModel.TraineeId);
+
+            if (inactiveUser != null && !data.ActiveTrainingUsers.All().Any(n => n.TrainerId == userId && n.TraineeId == viewModel.TraineeId))
+            {
+                this.data.InactiveTrainingUsers.Delete(inactiveUser);
+                this.data.ActiveTrainingUsers.Add(activeuser);
+                this.data.SaveChanges();
+            }
+            return activeuser.Id;
+        }
+
         public int AddUserToActiveTrainerUsers(AddActiveTrainerUsersViewModel viewModel, string userId)
         {
             if (data.ActiveTrainingUsers.All().Any(n => n.TrainerId == userId && n.TraineeId == viewModel.TraineeId))
@@ -25,7 +42,7 @@ namespace LiveToLift.Services
             activeUsers.TraineeId = viewModel.TraineeId;
             activeUsers.TrainerId = userId;
 
-            TrainerTraineeRequest trainerRequest = new TrainerTraineeRequest();
+            TrainerTraineeRequest trainerRequest = new TrainerTraineeRequest(); 
             trainerRequest.CreatorId = userId;
             trainerRequest.ReceiverId = viewModel.TraineeId;
             trainerRequest.IsTrainerCreator = true;
