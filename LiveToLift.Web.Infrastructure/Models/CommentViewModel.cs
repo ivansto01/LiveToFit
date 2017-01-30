@@ -14,12 +14,15 @@ namespace LiveToLift.Web.Infrastructure.Models
 
         public string UserName { get; set; }
 
+        public string UserPicture { get; set; }
+
         public string Content { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<Comment, CommentViewModel>()
              .ForMember(m => m.UserName, opt => opt.MapFrom(t => t.User != null ? t.User.Name : null))
+             .ForMember(m => m.UserPicture, opt => opt.MapFrom(t => t.User != null ? t.User.PhotoUrl : null))
 
              .ReverseMap();
         }
