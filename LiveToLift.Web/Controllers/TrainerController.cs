@@ -23,10 +23,17 @@ namespace LiveToLift.Web.Controllers
         [Authorize]
         public HttpResponseMessage AddUserToActiveTrainerUsers(AddActiveTrainerUsersViewModel viewModel)
         {
-            //var isAdmin = User.IsInRole("admin");
+            var isTrainer = User.IsInRole("Trainer");
             var userId = User.Identity.GetUserId();
-
-            int id = this.trainerService.AddUserToActiveTrainerUsers(viewModel, userId);
+            int id = 0;
+            if (isTrainer == true)
+            {
+                 id = this.trainerService.AddUserToActiveTrainerUsers(viewModel, userId);
+            }
+            else
+            {
+                throw new UnauthorizedAccessException();
+            }
 
             return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
         }

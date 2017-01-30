@@ -24,11 +24,13 @@ namespace LiveToLift.Web
             //var cors = new EnableCorsAttribute("*", "*", "*");
             //config.EnableCors(cors);
 
-            config.Routes.MapHttpRoute(
-            name: "DetailsByName",
-            routeTemplate: "api/{controller}/{name}",
-            defaults: new { action = "GetByName", name = RouteParameter.Optional }
-    );
+
+            //config.Routes.MapHttpRoute(
+            //  name: "DetailsByName",
+            //  routeTemplate: "api/User/{name}",
+            //  defaults: new { action = "GetByName", name = RouteParameter.Optional }
+            //);
+
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
@@ -36,6 +38,8 @@ namespace LiveToLift.Web
                 defaults: new { id = RouteParameter.Optional }
             );
 
+
+     
 
         }
     }

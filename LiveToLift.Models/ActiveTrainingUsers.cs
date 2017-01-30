@@ -9,11 +9,11 @@ namespace LiveToLift.Models
 {
    public class ActiveTrainingUsers:BaseModel<int>
     {
-        [Required]
+        
         public string TrainerId { get; set; }
         public ApplicationUser Trainer { get; set; }
 
-        [Required]
+        
         public string TraineeId { get; set; }
         public ApplicationUser Trainee { get; set; }
     }
