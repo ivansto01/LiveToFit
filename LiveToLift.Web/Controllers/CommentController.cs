@@ -38,9 +38,9 @@ namespace LiveToLift.Web.Controllers
             model.UserId = userId;
            
 
-            int id = commentService.CreateNewComment(model);
+            var newComment = commentService.CreateNewComment(model);
 
-            return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
+            return new HttpResponseMessage() { Content = new JsonContent(new { newComment = newComment }) };
 
         }
     }

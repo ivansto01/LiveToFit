@@ -10,6 +10,6 @@ namespace LiveToLift.Services
     public interface ICommentService
     {
         List<CommentViewModel> GetCommentsByUserName(string userName, int skip = 0, int take = 10);
-        int CreateNewComment(CommentViewModel model);
+        CommentViewModel CreateNewComment(CommentViewModel model);
     }
 }

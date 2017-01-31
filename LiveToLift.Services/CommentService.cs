@@ -17,14 +17,16 @@ namespace LiveToLift.Services
         {
         }
 
-        public int CreateNewComment(CommentViewModel model)
+        public CommentViewModel CreateNewComment(CommentViewModel model)
         {
             Comment dbModel = Mapper.Map<Comment>(model);
 
             data.Comments.Add(dbModel);
             data.SaveChanges();
 
-            return dbModel.Id;
+            CommentViewModel newComment = Mapper.Map<CommentViewModel>(this.data.Comments.All(new string[] { "User" }).FirstOrDefault(s=>s.Id== dbModel.Id));
+
+            return newComment;
         }
 
         public List<CommentViewModel> GetCommentsByUserName(string userName, int skip = 0, int take = 10)
