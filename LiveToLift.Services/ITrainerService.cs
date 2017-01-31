@@ -10,5 +10,6 @@ namespace LiveToLift.Services
     public interface ITrainerService
     {
         int AddUserToActiveTrainerUsers(AddActiveTrainerUsersViewModel viewModel, string userId);
+        int ActivateUser(AddActiveTrainerUsersViewModel viewModel, string userId);
     }
 }
