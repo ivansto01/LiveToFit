@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using LiveToLift.Models;
 using LiveToLift.Services;
 using LiveToLift.Web.Infrastructure.Models;
 using System;
@@ -26,6 +27,13 @@ namespace LiveToLift.Web.Controllers
             UserDetailsViewModel details = this.userService.ListUserTotalDetails(name);
 
             return details;
+        }
+
+        public UserFullProfileViewModel GetProfileUserInfo(string name)
+        {
+            UserFullProfileViewModel profileInfo = this.userService.GetProfileUserInfo(name);
+
+            return profileInfo;  
         }
     }
 }

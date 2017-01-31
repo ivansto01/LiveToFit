@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+using LiveToLift.Models;
 using LiveToLift.Web.Infrastructure.Models;
 
 namespace LiveToLift.Services
@@ -6,5 +8,6 @@ namespace LiveToLift.Services
     public interface IUserService
     {
         UserDetailsViewModel ListUserTotalDetails(string username);
+        UserFullProfileViewModel GetProfileUserInfo(string name);
     }
 }

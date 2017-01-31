@@ -55,5 +55,31 @@ namespace LiveToLift.Services
 
             return activeUsers.Id;
         }
+
+        public int DeaktivateUser(AddActiveTrainerUsersViewModel viewModel, string userId)
+        {
+            InactiveTrainingUsers newinactiveUser = new InactiveTrainingUsers();
+            newinactiveUser.TrainerId = userId;
+            newinactiveUser.TraineeId = viewModel.TraineeId;
+
+            InactiveTrainingUsers inactiveUser = this.data.InactiveTrainingUsers.All().FirstOrDefault(i => i.TrainerId == userId && i.TraineeId == viewModel.TraineeId);
+            if (inactiveUser!=null)
+            {
+                throw new ArgumentException("User is allready deactivated");
+
+            }
+            
+
+            ActiveTrainingUsers activeUser = this.data.ActiveTrainingUsers.All().FirstOrDefault(i => i.TrainerId == userId && i.TraineeId == viewModel.TraineeId);
+
+            if (activeUser != null && !data.InactiveTrainingUsers.All().Any(n => n.TrainerId == userId && n.TraineeId == viewModel.TraineeId))
+            {
+                this.data.ActiveTrainingUsers.Delete(activeUser);
+                this.data.InactiveTrainingUsers.Add(newinactiveUser);
+                this.data.SaveChanges();
+            }
+
+            return inactiveUser.Id;
+        }
     }
 }

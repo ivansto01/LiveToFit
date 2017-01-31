@@ -55,5 +55,23 @@ namespace LiveToLift.Web.Controllers
 
             return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
         }
+
+        [Authorize]
+        public HttpResponseMessage DeaktivateUser(AddActiveTrainerUsersViewModel viewModel)
+        {
+            var isTrainer = User.IsInRole("Trainer");
+            var userId = User.Identity.GetUserId();
+            int id = 0;
+            if (isTrainer == true)
+            {
+                id = this.trainerService.DeaktivateUser(viewModel, userId);
+            }
+            else
+            {
+                throw new UnauthorizedAccessException();
+            }
+
+            return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
+        }
     }
 }

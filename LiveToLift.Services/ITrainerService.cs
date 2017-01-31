@@ -11,5 +11,6 @@ namespace LiveToLift.Services
     {
         int AddUserToActiveTrainerUsers(AddActiveTrainerUsersViewModel viewModel, string userId);
         int ActivateUser(AddActiveTrainerUsersViewModel viewModel, string userId);
+        int DeaktivateUser(AddActiveTrainerUsersViewModel viewModel, string userId);
     }
 }
