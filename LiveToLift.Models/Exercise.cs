@@ -12,7 +12,7 @@ namespace LiveToLift.Models
 
         public string Description { get; set; }
 
-        public string PhotoUrl { get; set; }
+        public string PhotoUrl { get; set; } 
 
         public string VideoUrl { get; set; }
 

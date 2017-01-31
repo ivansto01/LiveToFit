@@ -9,5 +9,7 @@ namespace LiveToLift.Services
     {
         UserDetailsViewModel ListUserTotalDetails(string username);
         UserFullProfileViewModel GetProfileUserInfo(string name);
+        UserBasicInfoViewModel GetBasicUserInfo(string id);
+        void AddRatingToUser(RatingViewModel viewModel, string id);
     }
 }

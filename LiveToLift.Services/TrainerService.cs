@@ -64,7 +64,7 @@ namespace LiveToLift.Services
 
             InactiveTrainingUsers inactiveUser = this.data.InactiveTrainingUsers.All().FirstOrDefault(i => i.TrainerId == userId && i.TraineeId == viewModel.TraineeId);
             if (inactiveUser!=null)
-            {
+            {   
                 throw new ArgumentException("User is allready deactivated");
 
             }

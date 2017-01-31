@@ -58,6 +58,7 @@
     <Compile Include="Mapping\IMapFrom.cs" />
     <Compile Include="Models\AddActiveTrainerUsersViewModel.cs" />
     <Compile Include="Models\AddExInstanceToProgressSheetViewModel.cs" />
+    <Compile Include="Models\AddRatingToUser.cs" />
     <Compile Include="Models\AddTrainingToProgramViewModel.cs" />
     <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Models\RatingViewModel.cs" />
     <Compile Include="Models\TrainingDayViewModel.cs" />
     <Compile Include="Models\TrainingViewModel.cs" />
+    <Compile Include="Models\UserBasicInfoViewModel.cs" />
     <Compile Include="Models\UserDetailsViewModel.cs" />
     <Compile Include="Models\UserFullProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

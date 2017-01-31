@@ -2,6 +2,8 @@
 using LiveToLift.Models;
 using LiveToLift.Services;
 using LiveToLift.Web.Infrastructure.Models;
+using LiveToLift.Web.Infrastructure.Serialization;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -34,6 +36,24 @@ namespace LiveToLift.Web.Controllers
             UserFullProfileViewModel profileInfo = this.userService.GetProfileUserInfo(name);
 
             return profileInfo;  
+        }
+
+        public UserBasicInfoViewModel GetBasicUserInfo(string id)
+        {
+            UserBasicInfoViewModel profileInfo = this.userService.GetBasicUserInfo(id);
+
+            return profileInfo;
+        }
+
+        [Authorize]
+        public HttpResponseMessage AddRatingToUser(RatingViewModel viewModel, string id)
+        {
+            //var isAdmin = User.IsInRole("admin");
+            //var userId = User.Identity.GetUserId();
+
+            this.userService.AddRatingToUser(viewModel, id);
+
+            return new HttpResponseMessage() { Content = new JsonContent(new { connected = true }) };
         }
     }
 }
