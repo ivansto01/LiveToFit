@@ -36,5 +36,10 @@ namespace LiveToLift.Data
         {
             return this.Context.Users.FirstOrDefault(s => s.UserName == name);
         }
+
+        public IQueryable<ApplicationUser> All()
+        {
+            return this.Context.Users;
+        }
     }
 }

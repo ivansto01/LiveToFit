@@ -55,5 +55,32 @@ namespace LiveToLift.Web.Controllers
 
             return new HttpResponseMessage() { Content = new JsonContent(new { connected = true }) };
         }
+
+        [Authorize]
+        public List<UserInstancesViewModel> GetUserIntances()
+        {
+
+            var userId = User.Identity.GetUserId();
+
+            List<UserInstancesViewModel> userInstances = this.userService.GetUserIntances(userId);
+            return userInstances;
+        }
+
+        [Authorize]
+        public List<TrainingDayViewModel> GetUserTrainingDays()
+        {
+
+            var userId = User.Identity.GetUserId();
+
+            List<TrainingDayViewModel> userTrainingDays = this.userService.GetUserTrainingDays(userId);
+            return userTrainingDays;
+        }
+
+        public List<UserFullProfileViewModel> GetListUsers(string name = "", int skip = 0, int take = 10)
+        {
+            List<UserFullProfileViewModel> profileInfo = this.userService.GetListUsers(name, skip, take);
+
+            return profileInfo;
+        }
     }
 }

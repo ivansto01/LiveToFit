@@ -74,6 +74,7 @@
     <Compile Include="Models\UserBasicInfoViewModel.cs" />
     <Compile Include="Models\UserDetailsViewModel.cs" />
     <Compile Include="Models\UserFullProfileViewModel.cs" />
+    <Compile Include="Models\UserInstancesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\JsonContent.cs" />
   </ItemGroup>

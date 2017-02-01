@@ -10,5 +10,6 @@ namespace LiveToLift.Services
     public interface IExerciseService
     {
         List<ExerciseInstanceViewModel> GetExerciseInstancesByExerciseId(int exerciseId);
+        List<ExerciseVeiwModel> GetExerciseByName(string name, int skip = 0, int take = 10);
     }
 }

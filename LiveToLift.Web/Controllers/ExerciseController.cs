@@ -27,5 +27,15 @@ namespace LiveToLift.Web.Controllers
 
             return exInstances;
         }
+
+        [HttpGet]
+        [Authorize]
+        public List<ExerciseVeiwModel> GetExerciseByName(string name)
+        {
+
+            List<ExerciseVeiwModel> exercise = this.exerciseService.GetExerciseByName(name);
+
+            return exercise;
+        }
     }
 }

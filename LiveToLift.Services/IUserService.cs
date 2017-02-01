@@ -11,5 +11,8 @@ namespace LiveToLift.Services
         UserFullProfileViewModel GetProfileUserInfo(string name);
         UserBasicInfoViewModel GetBasicUserInfo(string id);
         void AddRatingToUser(RatingViewModel viewModel, string id);
+        List<UserInstancesViewModel> GetUserIntances(string userId, int skip = 0, int take = 10);
+        List<TrainingDayViewModel> GetUserTrainingDays(string userId, int skip = 0, int take = 10);
+        List<UserFullProfileViewModel> GetListUsers(string name = "", int skip = 0, int take = 10);
     }
 }

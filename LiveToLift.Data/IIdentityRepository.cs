@@ -13,5 +13,6 @@ namespace LiveToLift.Data
         ApplicationUser GetById(string id);
         ApplicationUser GetByUsername(string name);
         ApplicationRole GetRoleById(string id);
+        IQueryable<ApplicationUser> All();
     }
 }

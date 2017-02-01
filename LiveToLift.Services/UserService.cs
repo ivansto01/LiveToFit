@@ -5,7 +5,7 @@ using LiveToLift.Data;
 using LiveToLift.Models;
 using LiveToLift.Web.Infrastructure.Models;
 using System.Linq;
-
+using AutoMapper.QueryableExtensions;
 
 namespace LiveToLift.Services
 {
@@ -40,13 +40,41 @@ namespace LiveToLift.Services
 
         }
 
+
+        
+
+
+
         public UserFullProfileViewModel GetProfileUserInfo(string name)
         {
+
             ApplicationUser userProfile = this.data.Identity.GetByUsername(name);
+           
 
             UserFullProfileViewModel model = Mapper.Map<UserFullProfileViewModel>(userProfile);
             return model;
         }
+
+
+        public List<UserInstancesViewModel> GetUserIntances(string userId, int skip = 0, int take = 10)
+        {
+            List<UserInstancesViewModel> userInstances = this.data.FitnessProgramInstances.All().OrderBy(u => u.CreatedOn).Skip(skip).Take(take)
+                .Where(u => u.ApplicationUsersId == userId)
+                .Project().To<UserInstancesViewModel>().ToList();
+
+            return userInstances;
+        }
+
+
+        public List<TrainingDayViewModel> GetUserTrainingDays(string userId, int skip = 0, int take = 10)
+        {
+            List<TrainingDayViewModel> userTrainingDays = this.data.TrainingDays.All().OrderBy(t => t.CreatedOn).Skip(skip).Take(take)
+                .Where(t => t.FitnessProgramInstance.ApplicationUsersId == userId).Project().To<TrainingDayViewModel>().ToList();
+
+            return userTrainingDays;
+        }
+
+
 
         public UserDetailsViewModel ListUserTotalDetails(string username)
         {
@@ -56,6 +84,17 @@ namespace LiveToLift.Services
             UserDetailsViewModel model = Mapper.Map<UserDetailsViewModel>(dbUser);
 
             return model;
+        }
+
+
+
+        public List<UserFullProfileViewModel> GetListUsers(string name = "", int skip = 0, int take = 10)
+        {
+            List<UserFullProfileViewModel> users = this.data.Identity.All().Where(e => e.Name.Contains(name)).OrderBy(e => e.Name).Skip(skip).Take(take)
+                                                  .Project().To<UserFullProfileViewModel>().ToList();
+
+            return users;
+
         }
     }
 }
