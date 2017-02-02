@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveToLift.Services", "Live
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveToLift.Web.Infrastructure", "LiveToLift.Web.Infrastructure\LiveToLift.Web.Infrastructure.csproj", "{BDB3A117-3405-45DE-8C5A-7EA5356BBABE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveToLift.Crawler", "LiveToLift.Crawler\LiveToLift.Crawler.csproj", "{586DFC35-6ED8-43E5-B4C5-D21829EDBB9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{BDB3A117-3405-45DE-8C5A-7EA5356BBABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDB3A117-3405-45DE-8C5A-7EA5356BBABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDB3A117-3405-45DE-8C5A-7EA5356BBABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{586DFC35-6ED8-43E5-B4C5-D21829EDBB9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{586DFC35-6ED8-43E5-B4C5-D21829EDBB9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{586DFC35-6ED8-43E5-B4C5-D21829EDBB9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{586DFC35-6ED8-43E5-B4C5-D21829EDBB9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
