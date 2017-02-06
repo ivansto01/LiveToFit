@@ -19,7 +19,7 @@ namespace LiveToLift.Crawler
         public static void Main(string[] args)
         {
             StartCrawlerAsync();
-
+            ExerciseCrawiling();
             Console.ReadLine();
         }
 
@@ -42,19 +42,22 @@ namespace LiveToLift.Crawler
                     string text = div?.Descendants("h2")?.FirstOrDefault()?.InnerText;
                     var fitnesProgram = new FitnessProgram
                     {
-                        Name = Regex.Replace(text != null ? text :"", @"\t|\n|\r|", "").Trim() ,
-                        PhotoUrl = "http://darebee.com/"  + div.Descendants("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value,
+                        Name = Regex.Replace(text != null ? text : "", @"\t|\n|\r|", "").Trim(),
+                        PhotoUrl = "http://darebee.com/" + div.Descendants("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value,
                         CreatedOn = DateTime.Now
-                        
+
                     };
 
-                    var link = "http://darebee.com/" + div.Descendants("a").FirstOrDefault().ChildAttributes("href").FirstOrDefault().Value;
-                    var htmlDetails = httpCLient.GetStringAsync(link).Result;
-                    var htmlDetailsDocument = new HtmlDocument();
-                    htmlDetailsDocument.LoadHtml(htmlDetails);
-                    Console.WriteLine(htmlDetailsDocument);
-                    data.FitnessPrograms.Add(fitnesProgram);
-                
+
+                    if (!data.FitnessPrograms.Any(f=>f.Name == fitnesProgram.Name))
+                    {
+                        data.FitnessPrograms.Add(fitnesProgram);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Cannot dublicate same Fitness Programs");
+                    }
+
                 }
 
                 data.SaveChanges();
@@ -62,6 +65,43 @@ namespace LiveToLift.Crawler
             }
         }
 
+        private static void ExerciseCrawiling()
+        {
+            using (ApplicationDbContext data = new ApplicationDbContext())
+            {
+                var url = "http://www.total-gym-exercises.com/exercises/abs/index.html";
+                var httpClient = new HttpClient();
+                var html = httpClient.GetStringAsync(url).Result;
+                var imagesAbsUrl = "http://www.total-gym-exercises.com/exercises/abs/";
 
+                var htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(html);
+
+                var divs = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("boxContainerDiv")).ToList();
+
+                foreach (var div in divs)
+                {
+                    var exercise = new Exercise
+                    {
+                        Name = div?.Descendants("a")?.FirstOrDefault()?.InnerText,
+                        Description = div?.Descendants("li")?.FirstOrDefault()?.InnerText,
+                        PhotoUrl = imagesAbsUrl + div?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value
+                    };
+                    if (!data.Exercises.Any(e=>e.Name == exercise.Name))
+                    {
+                        data.Exercises.Add(exercise);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Cannot dublicate same Exercises");
+                    }
+                }
+                data.SaveChanges();
+            }
+        }
     }
 }
+                  
+                
+        
+

@@ -9,7 +9,7 @@ namespace LiveToLift.Services
 {
     public interface ITrainingService
     {
-        List<TrainingViewModel> DisplayFitnessPrograms(int skip = 0, int take = 10);
+        List<TrainingViewModel> GetAllTrainings(int skip = 0, int take = 10);
         TrainingViewModel TrainingById(int id);
         int CreateNewTraining(TrainingViewModel model);
         

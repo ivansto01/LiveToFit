@@ -23,7 +23,7 @@ namespace LiveToLift.Web.Controllers
         [HttpGet]
         public List<TrainingViewModel> GetAllTrainings(int skip = 0, int take = 10)
         {
-            List<TrainingViewModel> trainings = this.trainingService.DisplayFitnessPrograms(skip, take);
+            List<TrainingViewModel> trainings = this.trainingService.GetAllTrainings(skip, take);
 
             return trainings;
         }

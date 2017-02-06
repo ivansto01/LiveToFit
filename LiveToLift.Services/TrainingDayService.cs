@@ -42,11 +42,11 @@ namespace LiveToLift.Services
         {
             TrainingDay dbTrainDay = this.data.TrainingDays.All().FirstOrDefault(t => t.Id == viewModel.Id);
 
-            //tozi red e za da si vzemem ApplicationUser - koito ni trqbva za authentikaciqta. No toi se namira vyv FitnessProgramInstances
-            FitnessProgramInstance fpInstance = this.data.FitnessProgramInstances.All().FirstOrDefault(t => t.Id == dbTrainDay.FitnessProgramInstanceId);
-
             dbTrainDay.Date = viewModel.Date;
             dbTrainDay.Number = viewModel.Number;
+
+            //tozi red e za da si vzemem ApplicationUser - koito ni trqbva za authentikaciqta. No toi se namira vyv FitnessProgramInstances
+            FitnessProgramInstance fpInstance = this.data.FitnessProgramInstances.All().FirstOrDefault(t => t.Id == dbTrainDay.FitnessProgramInstanceId);
 
             for (int i = 0; i < viewModel.ExerciseInstances.Count; i++)
             {

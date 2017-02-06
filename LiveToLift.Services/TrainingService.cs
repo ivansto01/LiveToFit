@@ -35,7 +35,7 @@ namespace LiveToLift.Services
             return dbModel.Id;
         }
 
-        public List<TrainingViewModel> DisplayFitnessPrograms(int skip = 0, int take = 10)
+        public List<TrainingViewModel> GetAllTrainings(int skip = 0, int take = 10)
         {
             List<TrainingViewModel> trainings = this.data.Trainings.All().OrderByDescending(t => t.CreatedOn).Skip(skip).Take(take).
                                                 Project().To<TrainingViewModel>().ToList();

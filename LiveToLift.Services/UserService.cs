@@ -26,7 +26,7 @@ namespace LiveToLift.Services
             }
             else
             {
-                throw new ArgumentException("Rating can be only between range [1..5]");
+                throw new ArgumentException("Rating can be only between [1..5] range");
             }
         }
 
