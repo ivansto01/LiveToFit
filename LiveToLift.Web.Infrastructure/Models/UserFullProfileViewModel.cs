@@ -18,8 +18,8 @@ namespace LiveToLift.Web.Infrastructure.Models
 
         public string PhotoUrl { get; set; }
 
+        public bool IsYourTrainee { get; set; }
 
-        
 
         public UserFullProfileViewModel()
         {

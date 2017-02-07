@@ -68,8 +68,10 @@ namespace LiveToLift.Services
 
         public List<TrainingDayViewModel> GetUserTrainingDays(string userId, int skip = 0, int take = 10)
         {
-            List<TrainingDayViewModel> userTrainingDays = this.data.TrainingDays.All().OrderBy(t => t.CreatedOn).Skip(skip).Take(take)
-                .Where(t => t.FitnessProgramInstance.ApplicationUsersId == userId).Project().To<TrainingDayViewModel>().ToList();
+            List<TrainingDayViewModel> userTrainingDays = this.data.TrainingDays.All()
+                .Where(t => t.FitnessProgramInstance.ApplicationUsersId == userId)
+                .OrderBy(t => t.CreatedOn).Skip(skip).Take(take)
+                .Project().To<TrainingDayViewModel>().ToList();
 
             return userTrainingDays;
         }
@@ -88,10 +90,24 @@ namespace LiveToLift.Services
 
 
 
-        public List<UserFullProfileViewModel> GetListUsers(string name = "", int skip = 0, int take = 10)
+        public List<UserFullProfileViewModel> GetListUsers(string currentUser, string name = "", int skip = 0, int take = 10)
         {
-            List<UserFullProfileViewModel> users = this.data.Identity.All().Where(e => e.Name.Contains(name)).OrderBy(e => e.Name).Skip(skip).Take(take)
+            var activeTrainees = this.data.ActiveTrainingUsers.All().Where(s => s.TrainerId == currentUser);
+
+            List<UserFullProfileViewModel> users = this.data.Identity.All().Where(e => e.Name.Contains(name) && e.Id!= currentUser)
+                                                  .OrderBy(e => e.Name).Skip(skip).Take(take)
                                                   .Project().To<UserFullProfileViewModel>().ToList();
+
+            for (int i = 0; i < users.Count; i++)
+            {
+                var user = users.ElementAt(i);
+
+                if (activeTrainees.Any(s=>s.TraineeId == user.Id))
+                {
+                    user.IsYourTrainee = true;
+                }
+            }
+
 
             return users;
 

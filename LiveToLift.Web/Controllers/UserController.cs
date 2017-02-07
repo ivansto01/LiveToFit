@@ -76,9 +76,12 @@ namespace LiveToLift.Web.Controllers
             return userTrainingDays;
         }
 
+        [Authorize]
         public List<UserFullProfileViewModel> GetListUsers(string name = "", int skip = 0, int take = 10)
         {
-            List<UserFullProfileViewModel> profileInfo = this.userService.GetListUsers(name, skip, take);
+            string userId = this.User.Identity.GetUserId();
+
+            List<UserFullProfileViewModel> profileInfo = this.userService.GetListUsers(userId,name, skip, take);
 
             return profileInfo;
         }
