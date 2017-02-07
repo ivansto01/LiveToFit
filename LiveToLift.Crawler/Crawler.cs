@@ -18,12 +18,44 @@ namespace LiveToLift.Crawler
 
         public static void Main(string[] args)
         {
-            StartCrawlerAsync();
-            ExerciseCrawiling();
+            var ExerciseTricepsCrawlingUrl = "http://www.total-gym-exercises.com/exercises/triceps/index.html";
+            var ExerciseTricepsCrawlingImageUrl = "http://www.total-gym-exercises.com/exercises/triceps/";
+
+            var ExerciseBicepsCrawlingUrl = "http://www.total-gym-exercises.com/exercises/biceps/index.html";
+            var ExerciseBicepsCrawlingImage = "http://www.total-gym-exercises.com/exercises/biceps/";
+
+            var ExerciseShouldersCrawlingUrl = "http://www.total-gym-exercises.com/exercises/shoulders/index.html";
+            var ExerciseShouldersCrawlingImage = "http://www.total-gym-exercises.com/exercises/shoulders/";
+
+            var ExerciseLegsCrawlingUrl = "http://www.total-gym-exercises.com/exercises/legs/index.html";
+            var ExerciseLegsCrawlingImage = "http://www.total-gym-exercises.com/exercises/legs/";
+
+            var ExerciseChestCrawlingUrl = "http://www.total-gym-exercises.com/exercises/chest/index.html";
+            var ExerciseChestCrawlingImage = "http://www.total-gym-exercises.com/exercises/chest/";
+
+            var ExerciseBackCrawlingUrl = "http://www.total-gym-exercises.com/exercises/back/index.html";
+            var ExerciseBackCrawlingImage = "http://www.total-gym-exercises.com/exercises/back/";
+
+            var ExerciseAbsCrawilingUrl = "http://www.total-gym-exercises.com/exercises/abs/index.html";
+            var ExerciseAbsCrawilingImage = "http://www.total-gym-exercises.com/exercises/abs/";
+
+            
+            ExerciseCrawiling(ExerciseAbsCrawilingUrl, ExerciseAbsCrawilingImage);
+            ExerciseCrawiling(ExerciseBackCrawlingUrl, ExerciseBackCrawlingImage);
+            ExerciseCrawiling(ExerciseChestCrawlingUrl, ExerciseChestCrawlingImage);
+            ExerciseCrawiling(ExerciseLegsCrawlingUrl, ExerciseLegsCrawlingImage);
+            ExerciseCrawiling(ExerciseShouldersCrawlingUrl, ExerciseShouldersCrawlingImage);
+            ExerciseCrawiling(ExerciseBicepsCrawlingUrl, ExerciseBicepsCrawlingImage);
+            ExerciseCrawiling(ExerciseTricepsCrawlingUrl, ExerciseTricepsCrawlingImageUrl);
+
+            //FitnesProgramCrawiling();
+            Console.WriteLine("End");
             Console.ReadLine();
+
+            
         }
 
-        private static void StartCrawlerAsync()
+        private static void FitnesProgramCrawiling()
         {
             using (ApplicationDbContext data = new ApplicationDbContext())
             {
@@ -65,14 +97,14 @@ namespace LiveToLift.Crawler
             }
         }
 
-        private static void ExerciseCrawiling()
+        private static void ExerciseCrawiling(string url, string imagesUrl)
         {
             using (ApplicationDbContext data = new ApplicationDbContext())
             {
-                var url = "http://www.total-gym-exercises.com/exercises/abs/index.html";
+                //var url = "http://www.total-gym-exercises.com/exercises/abs/index.html";
                 var httpClient = new HttpClient();
                 var html = httpClient.GetStringAsync(url).Result;
-                var imagesAbsUrl = "http://www.total-gym-exercises.com/exercises/abs/";
+                //var imagesAbsUrl = "http://www.total-gym-exercises.com/exercises/abs/";
 
                 var htmlDocument = new HtmlDocument();
                 htmlDocument.LoadHtml(html);
@@ -85,8 +117,13 @@ namespace LiveToLift.Crawler
                     {
                         Name = div?.Descendants("a")?.FirstOrDefault()?.InnerText,
                         Description = div?.Descendants("li")?.FirstOrDefault()?.InnerText,
-                        PhotoUrl = imagesAbsUrl + div?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value
+                        PhotoUrl = imagesUrl + div?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value
                     };
+                    if (exercise.Name == null || exercise.Name.StartsWith("Show More"))
+                    {
+                        continue;
+                    }
+
                     if (!data.Exercises.Any(e=>e.Name == exercise.Name))
                     {
                         data.Exercises.Add(exercise);
@@ -99,6 +136,220 @@ namespace LiveToLift.Crawler
                 data.SaveChanges();
             }
         }
+
+        //private static void ExerciseBackCrawling()
+        //{
+        //    using (ApplicationDbContext data = new ApplicationDbContext())
+        //    {
+        //        var url = "http://www.total-gym-exercises.com/exercises/back/index.html";
+        //        var httpClient = new HttpClient();
+        //        var html = httpClient.GetStringAsync(url).Result;
+        //        var imagesAbsUrl = "http://www.total-gym-exercises.com/exercises/back/";
+
+        //        var htmlDocument = new HtmlDocument();
+        //        htmlDocument.LoadHtml(html);
+
+        //        var divs = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("boxContainerDiv")).ToList();
+
+        //        foreach (var div in divs)
+        //        {
+        //            var exercise = new Exercise
+        //            {
+        //                Name = div?.Descendants("a")?.FirstOrDefault()?.InnerText,
+        //                Description = div?.Descendants("li")?.FirstOrDefault()?.InnerText,
+        //                PhotoUrl = imagesAbsUrl + div?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value
+        //            };
+        //            if (!data.Exercises.Any(e => e.Name == exercise.Name))
+        //            {
+        //                data.Exercises.Add(exercise);
+        //            }
+        //            else
+        //            {
+        //                throw new ArgumentException("Cannot dublicate same Exercises");
+        //            }
+        //        }
+        //        data.SaveChanges();
+        //    }
+        //}
+
+        //private static void ExerciseChestCrawling()
+        //{
+        //    using (ApplicationDbContext data = new ApplicationDbContext())
+        //    {
+        //        var url = "http://www.total-gym-exercises.com/exercises/chest/index.html";
+        //        var httpClient = new HttpClient();
+        //        var html = httpClient.GetStringAsync(url).Result;
+        //        var imagesAbsUrl = "http://www.total-gym-exercises.com/exercises/chest/";
+
+        //        var htmlDocument = new HtmlDocument();
+        //        htmlDocument.LoadHtml(html);
+
+        //        var divs = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("boxContainerDiv")).ToList();
+
+        //        foreach (var div in divs)
+        //        {
+        //            var exercise = new Exercise
+        //            {
+        //                Name = div?.Descendants("a")?.FirstOrDefault()?.InnerText,
+        //                Description = div?.Descendants("li")?.FirstOrDefault()?.InnerText,
+        //                PhotoUrl = imagesAbsUrl + div?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value
+        //            };
+        //            if (!data.Exercises.Any(e => e.Name == exercise.Name))
+        //            {
+        //                data.Exercises.Add(exercise);
+        //            }
+        //            else
+        //            {
+        //                throw new ArgumentException("Cannot dublicate same Exercises");
+        //            }
+        //        }
+        //        data.SaveChanges();
+        //    }
+        //}
+
+        //private static void ExerciseLegsCrawling()
+        //{
+        //    using (ApplicationDbContext data = new ApplicationDbContext())
+        //    {
+        //        var url = "http://www.total-gym-exercises.com/exercises/legs/index.html";
+        //        var httpClient = new HttpClient();
+        //        var html = httpClient.GetStringAsync(url).Result;
+        //        var imagesAbsUrl = "http://www.total-gym-exercises.com/exercises/legs/";
+
+        //        var htmlDocument = new HtmlDocument();
+        //        htmlDocument.LoadHtml(html);
+
+        //        var divs = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("boxContainerDiv")).ToList();
+
+        //        foreach (var div in divs)
+        //        {
+        //            var exercise = new Exercise
+        //            {
+        //                Name = div?.Descendants("a")?.FirstOrDefault()?.InnerText,
+        //                Description = div?.Descendants("li")?.FirstOrDefault()?.InnerText,
+        //                PhotoUrl = imagesAbsUrl + div?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value
+        //            };
+        //            if (!data.Exercises.Any(e => e.Name == exercise.Name))
+        //            {
+        //                data.Exercises.Add(exercise);
+        //            }
+        //            else
+        //            {
+        //                throw new ArgumentException("Cannot dublicate same Exercises");
+        //            }
+        //        }
+        //        data.SaveChanges();
+        //    }
+        //}
+
+        //private static void ExerciseShouldersCrawling()
+        //{
+        //    using (ApplicationDbContext data = new ApplicationDbContext())
+        //    {
+        //        var url = "http://www.total-gym-exercises.com/exercises/shoulders/index.html";
+        //        var httpClient = new HttpClient();
+        //        var html = httpClient.GetStringAsync(url).Result;
+        //        var imagesAbsUrl = "http://www.total-gym-exercises.com/exercises/shoulders/";
+
+        //        var htmlDocument = new HtmlDocument();
+        //        htmlDocument.LoadHtml(html);
+
+        //        var divs = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("boxContainerDiv")).ToList();
+
+        //        foreach (var div in divs)
+        //        {
+        //            var exercise = new Exercise
+        //            {
+        //                Name = div?.Descendants("a")?.FirstOrDefault()?.InnerText,
+        //                Description = div?.Descendants("li")?.FirstOrDefault()?.InnerText,
+        //                PhotoUrl = imagesAbsUrl + div?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value
+        //            };
+        //            if (!data.Exercises.Any(e => e.Name == exercise.Name))
+        //            {
+        //                data.Exercises.Add(exercise);
+        //            }
+        //            else
+        //            {
+        //                throw new ArgumentException("Cannot dublicate same Exercises");
+        //            }
+        //        }
+        //        data.SaveChanges();
+        //    }
+        //}
+
+        //private static void ExerciseBicepsCrawling()
+        //{
+        //    using (ApplicationDbContext data = new ApplicationDbContext())
+        //    {
+        //        var url = "http://www.total-gym-exercises.com/exercises/biceps/index.html";
+        //        var httpClient = new HttpClient();
+        //        var html = httpClient.GetStringAsync(url).Result;
+        //        var imagesAbsUrl = "http://www.total-gym-exercises.com/exercises/biceps/";
+
+        //        var htmlDocument = new HtmlDocument();
+        //        htmlDocument.LoadHtml(html);
+
+        //        var divs = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("boxContainerDiv")).ToList();
+
+        //        foreach (var div in divs)
+        //        {
+        //            var exercise = new Exercise
+        //            {
+        //                Name = div?.Descendants("a")?.FirstOrDefault()?.InnerText,
+        //                Description = div?.Descendants("li")?.FirstOrDefault()?.InnerText,
+        //                PhotoUrl = imagesAbsUrl + div?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value
+        //            };
+        //            if (exercise.Name == null)
+        //            {
+        //                continue;
+        //            }
+        //            if (!data.Exercises.Any(e => e.Name == exercise.Name))
+        //            {
+        //                data.Exercises.Add(exercise);
+        //            }
+        //            else
+        //            {
+        //                throw new ArgumentException("Cannot dublicate same Exercises");
+        //            }
+        //        }
+        //        data.SaveChanges();
+        //    }
+        //}
+
+        //private static void ExerciseTricepsCrawling()
+        //{
+        //    using (ApplicationDbContext data = new ApplicationDbContext())
+        //    {
+        //        var url = "http://www.total-gym-exercises.com/exercises/triceps/index.html";
+        //        var httpClient = new HttpClient();
+        //        var html = httpClient.GetStringAsync(url).Result;
+        //        var imagesAbsUrl = "http://www.total-gym-exercises.com/exercises/triceps/";
+
+        //        var htmlDocument = new HtmlDocument();
+        //        htmlDocument.LoadHtml(html);
+
+        //        var divs = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("boxContainerDiv")).ToList();
+
+        //        foreach (var div in divs)
+        //        {
+        //            var exercise = new Exercise
+        //            {
+        //                Name = div?.Descendants("a")?.FirstOrDefault()?.InnerText,
+        //                Description = div?.Descendants("li")?.FirstOrDefault()?.InnerText,
+        //                PhotoUrl = imagesAbsUrl + div?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value
+        //            };
+        //            if (!data.Exercises.Any(e => e.Name == exercise.Name))
+        //            {
+        //                data.Exercises.Add(exercise);
+        //            }
+        //            else
+        //            {
+        //                throw new ArgumentException("Cannot dublicate same Exercises");
+        //            }
+        //        }
+        //        data.SaveChanges();
+        //    }
+        //}
     }
 }
                   
