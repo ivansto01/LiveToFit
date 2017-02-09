@@ -1,19 +1,21 @@
-﻿using System;
+﻿using LiveToLift.Models;
+using LiveToLift.Web.Infrastructure.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LiveToLift.Models
+namespace LiveToLift.Web.Infrastructure.Models
 {
-    public class TrainerTraineeRequest : BaseModel<int>
+    public class TrainerTraineeRequestViewModel : BaseViewModel, IMapFrom<TrainerTraineeRequest>
     {
         public string CreatorId { get; set; }
-        public ApplicationUser Creator { get; set; }
+        
 
         public string ReceiverId { get; set; }
-        public ApplicationUser Receiver { get; set; }
-
+       
+ 
         public bool IsRequestApproved { get; set; }
 
         public bool IsTrainerCreator { get; set; }

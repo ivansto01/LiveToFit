@@ -21,7 +21,7 @@ namespace LiveToLift.Services
             List<ExerciseVeiwModel> exercise = this.data.Exercises.All().Where(e => e.Name.Contains(name)).OrderBy(e => e.CreatedOn).Skip(skip).Take(take)
                                                 .Project().To<ExerciseVeiwModel>().ToList();
 
-            return exercise;
+            return exercise;    
         }
 
         public List<ExerciseInstanceViewModel> GetExerciseInstancesByExerciseId(int exerciseId)

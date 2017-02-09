@@ -73,5 +73,59 @@ namespace LiveToLift.Web.Controllers
 
             return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
         }
+
+        [Authorize]
+        public List<TrainerTraineeRequestViewModel> GetNewRequest(int skip = 0, int take = 10)
+        {
+            var userId = User.Identity.GetUserId();
+
+            List<TrainerTraineeRequestViewModel> requests = this.trainerService.GetNewRequest(userId, skip, take);
+
+            return requests;
+        }
+
+        [Authorize]
+        public List<TrainerTraineeRequestViewModel> GetAllRequests(int skip = 0, int take = 10)
+        {
+            var userId = User.Identity.GetUserId();
+
+            List<TrainerTraineeRequestViewModel> requests = this.trainerService.GetAllRequests(userId, skip, take);
+
+            return requests;
+        }
+
+        [Authorize]
+        public HttpResponseMessage UpdateViewRequest(TrainerTraineeRequestViewModel viewModel)
+        {
+            
+            var userId = User.Identity.GetUserId();
+            
+
+            int id = this.trainerService.UpdateViewRequest(viewModel, userId);
+            return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
+        }
+
+        [Authorize]
+        public HttpResponseMessage AproveRequest(TrainerTraineeRequestViewModel viewModel)
+        {
+
+            var userId = User.Identity.GetUserId();
+
+
+            int id = this.trainerService.AproveRequest(viewModel, userId);
+            return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
+        }
+
+
+        [Authorize]
+        public HttpResponseMessage RejectRequest(TrainerTraineeRequestViewModel viewModel)
+        {
+
+            var userId = User.Identity.GetUserId();
+
+
+            int id = this.trainerService.RejectRequest(viewModel, userId);
+            return new HttpResponseMessage() { Content = new JsonContent(new { id = id }) };
+        }
     }
 }

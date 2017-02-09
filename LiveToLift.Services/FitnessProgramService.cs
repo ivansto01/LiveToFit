@@ -16,14 +16,14 @@ namespace LiveToLift.Services
     public class FitnessProgramService : CommonService, IFitnessProgramService
     {
 
-        public FitnessProgramService(IUowData data) 
-            : base(data)    
+        public FitnessProgramService(IUowData data)
+            : base(data)
         {
         }
 
         public int AddFitnessProgramInstance(FitnessProgramInstanceViewModel model)
         {
-            var fitnessProgram = this.data.FitnessPrograms.All().FirstOrDefault(p => p.Id ==  model.FitnessProgramId);
+            var fitnessProgram = this.data.FitnessPrograms.All().FirstOrDefault(p => p.Id == model.FitnessProgramId);
 
             var user = this.data.Identity.GetById(model.ApplicationUsersId);
 
@@ -35,7 +35,7 @@ namespace LiveToLift.Services
             }
 
 
-            for (int i =0; i < fitnessProgram.OverallTrainingCount; i++)
+            for (int i = 0; i < fitnessProgram.OverallTrainingCount; i++)
             {
                 TrainingDay newTrainingDay = new TrainingDay();
 
@@ -50,25 +50,25 @@ namespace LiveToLift.Services
 
                     newTrainingDay.ExerciseInstances.Add(
                         new ExerciseInstance()
-                    {
-                        ExerciseId = excercise.Id
-                    });
+                        {
+                            ExerciseId = excercise.Id
+                        });
                 }
 
                 dbModel.TrainingDays.Add(newTrainingDay);
             }
-            
+
 
             data.FitnessProgramInstances.Add(dbModel);
 
             user.FitnessProgramInstances.Add(dbModel);
             data.SaveChanges();
-            
+
 
             return dbModel.Id;
         }
 
-        
+
 
         public void AddTrainingToFitnessProgram(AddTrainingToProgramViewModel model, bool isAdmin, string userId)
         {
@@ -86,7 +86,7 @@ namespace LiveToLift.Services
                 fitnessProgram.Trainings.Add(training);
                 this.data.FitnessPrograms.Update(fitnessProgram);
                 data.SaveChanges();
-            }
+            }  
             else
             {
                 throw new UnauthorizedAccessException();
@@ -104,12 +104,12 @@ namespace LiveToLift.Services
             data.SaveChanges();
 
             return dbModel.Id;
-                
+
         }
 
         public List<FitnessProgramViewModel> DisplayFitnessPrograms(int skip = 0, int take = 10)
         {
-            List<FitnessProgramViewModel> fitnessPrograms = this.data.FitnessPrograms.All().OrderByDescending(f=>f.CreatedOn).Skip(skip).Take(take).Project()
+            List<FitnessProgramViewModel> fitnessPrograms = this.data.FitnessPrograms.All().OrderByDescending(f => f.CreatedOn).Skip(skip).Take(take).Project()
                                          .To<FitnessProgramViewModel>()
                                          .ToList();
 
@@ -126,7 +126,7 @@ namespace LiveToLift.Services
             {
                 model.Comments = new List<CommentViewModel>();
                 model.Trainings = new List<TrainingViewModel>();
-            }    
+            }
 
             return model;
         }
@@ -141,13 +141,13 @@ namespace LiveToLift.Services
             return comments;
         }
 
-        
+
 
         // Pri Edit i Update e mnogo preporychotelno vs propertita da se mapvat na ryka :
 
         public int UpdateFitnessProgram(DetailedFitnessProgramViewModel viewModel, bool isAdmin, string userId)
         {
-           
+
             // Mapvane na ryka
             var db = this.data.FitnessPrograms.All().FirstOrDefault(s => s.Id == viewModel.Id);
             db.Name = viewModel.Name;

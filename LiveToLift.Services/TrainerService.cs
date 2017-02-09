@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LiveToLift.Data;
 using LiveToLift.Web.Infrastructure.Models;
 using LiveToLift.Models;
+using AutoMapper.QueryableExtensions;
 
 namespace LiveToLift.Services
 {
@@ -56,6 +57,8 @@ namespace LiveToLift.Services
             return activeUsers.Id;
         }
 
+        
+
         public int DeaktivateUser(AddActiveTrainerUsersViewModel viewModel, string userId)
         {
             InactiveTrainingUsers newinactiveUser = new InactiveTrainingUsers();
@@ -80,6 +83,79 @@ namespace LiveToLift.Services
             }
 
             return inactiveUser.Id;
+        }
+
+        public List<TrainerTraineeRequestViewModel> GetAllRequests(string userId, int skip = 0, int take = 0)
+        {
+            List<TrainerTraineeRequestViewModel> requests = this.data.TrainerTraineeRequests.All().Where(r => r.ReceiverId == userId)
+                                                            .OrderBy(r => r.CreatedOn).Skip(skip).Take(take).Project().To<TrainerTraineeRequestViewModel>().ToList();
+
+            return requests;
+        }
+
+        public List<TrainerTraineeRequestViewModel> GetNewRequest(string userId, int skip = 0, int take = 0)
+        {
+            List<TrainerTraineeRequestViewModel> requests = this.data.TrainerTraineeRequests.All().Where(r => r.ReceiverId == userId && r.IsNew == true)
+                                                            .OrderBy(r=>r.CreatedOn).Skip(skip).Take(take)
+                                                            .Project().To<TrainerTraineeRequestViewModel>().ToList();
+
+            return requests;
+        }
+
+        public int UpdateViewRequest(TrainerTraineeRequestViewModel model, string userId)
+        {
+            var requestDb = this.data.TrainerTraineeRequests.All().FirstOrDefault(r => r.Id == model.Id);
+            requestDb.Id = model.Id;
+            requestDb.IsNew = model.IsNew;
+            requestDb.ReceiverId = model.ReceiverId;
+             
+            if (userId == requestDb.ReceiverId)
+            {
+                requestDb.IsNew = false;
+                this.data.TrainerTraineeRequests.Update(requestDb);
+                this.data.SaveChanges();
+            }
+            return requestDb.Id;
+        }
+
+        public int AproveRequest(TrainerTraineeRequestViewModel viewModel, string userId)
+        {
+            var requestDb = this.data.TrainerTraineeRequests.All().FirstOrDefault(r => r.Id == viewModel.Id);
+            requestDb.Id = viewModel.Id;
+            requestDb.IsNew = viewModel.IsNew;
+            requestDb.ReceiverId = viewModel.ReceiverId;
+            requestDb.IsRequestApproved = viewModel.IsRequestApproved;
+            requestDb.IsRejected = viewModel.IsRejected;
+
+            if (userId == requestDb.ReceiverId)
+            {
+                requestDb.IsNew = false;
+                requestDb.IsRequestApproved = true;
+                requestDb.IsRejected = false;
+                this.data.TrainerTraineeRequests.Update(requestDb);
+                this.data.SaveChanges();
+            }
+            return requestDb.Id;
+        }
+
+        public int RejectRequest(TrainerTraineeRequestViewModel viewModel, string userId)
+        {
+            var requestDb = this.data.TrainerTraineeRequests.All().FirstOrDefault(r => r.Id == viewModel.Id);
+            requestDb.Id = viewModel.Id;
+            requestDb.IsNew = viewModel.IsNew;
+            requestDb.ReceiverId = viewModel.ReceiverId;
+            requestDb.IsRequestApproved = viewModel.IsRequestApproved;
+            requestDb.IsRejected = viewModel.IsRejected;
+
+            if (userId == requestDb.ReceiverId)
+            {
+                requestDb.IsNew = false;
+                requestDb.IsRequestApproved = false;
+                requestDb.IsRejected = true;
+                this.data.TrainerTraineeRequests.Update(requestDb);
+                this.data.SaveChanges();
+            }
+            return requestDb.Id;
         }
     }
 }

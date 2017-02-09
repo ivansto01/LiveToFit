@@ -69,6 +69,7 @@
     <Compile Include="Models\FitnessProgramViewModel.cs" />
     <Compile Include="Models\ProgressSheetViewModel.cs" />
     <Compile Include="Models\RatingViewModel.cs" />
+    <Compile Include="Models\TrainerTraineeRequestViewModel.cs" />
     <Compile Include="Models\TrainingDayViewModel.cs" />
     <Compile Include="Models\TrainingViewModel.cs" />
     <Compile Include="Models\UserBasicInfoViewModel.cs" />
